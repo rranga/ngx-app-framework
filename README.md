@@ -1,96 +1,192 @@
-# NgxAppFramework
+# ngx-app-framework
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A native-first Angular application framework and reusable UI component library built with **Angular, Nx, TypeScript, and CSS design tokens**.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+The goal is to provide reusable, accessible, themeable UI components and shared application-development capabilities for enterprise Angular applications.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+> **Development status:** Workspace foundation and initial design-token foundation implemented. Storybook integration, the reusable component library, and application development kit are planned for subsequent phases.
 
-## Run tasks
+## Project Goals
 
-To run tasks with Nx use:
+- Build reusable Angular UI components using native HTML, CSS, and Angular.
+- Establish consistent design tokens and light/dark theme support.
+- Follow standalone Angular component patterns and modern Angular APIs.
+- Support accessibility, keyboard navigation, and semantic HTML.
+- Provide component documentation and interactive examples through Storybook.
+- Establish automated unit, end-to-end, and visual regression testing.
+- Organize shared code and applications in an Nx integrated monorepo.
+- Prepare reusable libraries for package distribution.
 
-```sh
-npx nx <target> <project-name>
+## Technology Stack
+
+| Technology                   | Purpose                                      |
+| ---------------------------- | -------------------------------------------- |
+| Angular                      | Application and component framework          |
+| Nx                           | Monorepo management and task orchestration   |
+| TypeScript                   | Type-safe development                        |
+| CSS / SCSS                   | Styling, design tokens, and component styles |
+| npm                          | Dependency and package management            |
+| ESLint                       | Code quality                                 |
+| Vitest-based Angular testing | Unit testing                                 |
+| Playwright                   | Browser-based end-to-end testing             |
+
+Storybook, visual regression workflows, and package publishing are planned capabilities; their implementation status should be updated as those phases are completed.
+
+## Repository Structure
+
+```text
+ngx-app-framework/
+├── apps/
+│   └── host/                 # Host application and integration testing
+├── libs/
+│   └── design-tokens/        # Shared CSS design-token foundation
+├── docs/                     # Technical and phase documentation
+├── tools/                    # Reserved for development tooling
+├── nx.json
+├── package.json
+├── package-lock.json
+├── tsconfig.base.json
+└── README.md
 ```
 
-For example:
+The structure will expand as additional applications, reusable libraries, and documentation tools are introduced.
 
-```sh
-npx nx build myproject
+## Getting Started
+
+### Prerequisites
+
+Install Node.js, npm, and Git. Use versions compatible with the repository's dependencies.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/rranga/ngx-app-framework.git
+cd ngx-app-framework
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### 2. Install dependencies
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
+```bash
+npm ci
 ```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+### 3. Explore the Nx workspace
 
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
-
-# Generate a library
-npx nx g @nx/react:lib some-lib
+```bash
+npx nx show projects
+npx nx graph
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+The project list shows the actual applications and libraries configured in your local workspace. The project graph visualizes their relationships.
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### 4. Run the Host application
 
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
+```bash
+npx nx serve host
 ```
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+Open the local URL printed by Nx, normally:
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
+```text
+http://localhost:4200/
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+The Host application currently provides a design-token smoke-test page with light and dark theme behavior.
 
-## Install Nx Console
+## Common Development Commands
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Run commands from the repository root.
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Host application
 
-## Useful links
+```bash
+npx nx build host
+npx nx test host
+npx nx lint host
+```
 
-Learn more:
+### Design-token library
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/intro#learn-nx?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+npx nx build design-tokens
+```
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### End-to-end testing
+
+Check the configured E2E project name with:
+
+```bash
+npx nx show projects
+```
+
+Then run its E2E target using the project name shown in the workspace.
+
+## Design Tokens
+
+The `design-tokens` library provides shared CSS custom properties for:
+
+- Brand and semantic colors
+- Backgrounds and surfaces
+- Spacing
+- Typography
+- Border widths and radii
+- Box shadows
+- Z-index layering
+- Light and dark themes
+- Baseline styles for focus visibility and reduced motion
+
+The current stylesheet entry point is:
+
+```text
+libs/design-tokens/src/lib/styles/index.css
+```
+
+The Host application currently imports this stylesheet through a local source-relative path. A stable public CSS import path for external package consumers remains to be finalized.
+
+See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation details and examples.
+
+## Documentation
+
+- [Workspace Foundation — Phase 01](docs/workspace-foundation.md)
+- [Design Tokens — Phase 02](docs/design-tokens.md)
+- [Implementation Roadmap](docs/implementation-roadmap.md) — include this link when the roadmap file exists.
+
+## Development Principles
+
+- **Native-first UI:** Prefer native HTML and CSS rather than depending on a third-party visual component library.
+- **Accessibility:** Use semantic markup, keyboard support, visible focus indicators, and accessible interaction patterns.
+- **Reusability:** Keep shared UI and application capabilities in dedicated libraries.
+- **Consistency:** Use shared design tokens rather than duplicating styling values.
+- **Quality:** Validate changes with builds, linting, unit tests, and appropriate browser tests.
+- **Incremental delivery:** Implement, verify, document, and commit each phase separately.
+
+## Planned Development
+
+The roadmap includes:
+
+1. Workspace foundation.
+2. Design-token foundation.
+3. Storybook setup and documentation.
+4. Native UI component library and foundational form controls.
+5. Additional component tiers and accessibility testing.
+6. Application Development Kit (ADK).
+7. Composed examples and showcase applications.
+8. CI, package publishing, and release workflows.
+9. Developer documentation and contribution guidance.
+
+The roadmap describes intended work, not a claim that all these capabilities are already implemented.
+
+## Contributing
+
+During development, keep documentation aligned with the code, run the relevant validation commands, and use descriptive commit messages.
+
+Example:
+
+```text
+feat(design-tokens): add core design token foundation
+docs(workspace): document foundation and design tokens
+```
+
+## License
+
+Add the project's chosen license before distributing the framework publicly as an open-source package.
