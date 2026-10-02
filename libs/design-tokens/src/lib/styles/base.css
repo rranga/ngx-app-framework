@@ -1,0 +1,27 @@
+
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html) {
+  font-family: var(--ngx-font-family-base);
+  line-height: var(--ngx-line-height-normal);
+}
+
+:where(:focus-visible) {
+  outline: 2px solid var(--ngx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

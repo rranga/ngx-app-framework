@@ -1,0 +1,25 @@
+
+[data-ngx-theme="dark"] {
+  color-scheme: dark;
+
+  --ngx-color-primary: #60a5fa;
+  --ngx-color-primary-hover: #93c5fd;
+  --ngx-color-secondary: #cbd5e1;
+
+  --ngx-color-success: #4ade80;
+  --ngx-color-warning: #facc15;
+  --ngx-color-error: #f87171;
+  --ngx-color-info: #38bdf8;
+
+  --ngx-color-background: #0b1120;
+  --ngx-color-surface: #111827;
+  --ngx-color-surface-raised: #1f2937;
+  --ngx-color-text: #f8fafc;
+  --ngx-color-text-muted: #cbd5e1;
+  --ngx-color-border: #475569;
+  --ngx-color-focus-ring: #93c5fd;
+
+  --ngx-shadow-sm: 0 1px 2px rgb(0 0 0 / 25%);
+  --ngx-shadow-md: 0 4px 12px rgb(0 0 0 / 30%);
+  --ngx-shadow-lg: 0 12px 32px rgb(0 0 0 / 40%);
+}

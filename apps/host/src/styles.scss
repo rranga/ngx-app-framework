@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../../../libs/design-tokens/src/lib/styles/index.css';
+@import '../../../libs/design-tokens/src/lib/styles/themes/dark.css';
+
+/* Temporary integration smoke test */
+.ngx-token-smoke-test {
+  color: var(--ngx-color-text);
+  background-color: var(--ngx-color-background);
+  padding: var(--ngx-space-4);
+  border-radius: var(--ngx-radius-md);
+}

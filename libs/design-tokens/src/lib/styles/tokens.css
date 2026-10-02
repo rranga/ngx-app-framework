@@ -1,0 +1,75 @@
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --ngx-color-primary: #2563eb;
+  --ngx-color-primary-hover: #1d4ed8;
+  --ngx-color-secondary: #475569;
+
+  /* Semantic colors */
+  --ngx-color-success: #15803d;
+  --ngx-color-warning: #a16207;
+  --ngx-color-error: #b91c1c;
+  --ngx-color-info: #0369a1;
+
+  /* Surfaces and text */
+  --ngx-color-background: #ffffff;
+  --ngx-color-surface: #f8fafc;
+  --ngx-color-surface-raised: #ffffff;
+  --ngx-color-text: #0f172a;
+  --ngx-color-text-muted: #475569;
+  --ngx-color-border: #cbd5e1;
+  --ngx-color-focus-ring: #2563eb;
+
+  /* Spacing */
+  --ngx-space-1: 0.25rem;
+  --ngx-space-2: 0.5rem;
+  --ngx-space-3: 0.75rem;
+  --ngx-space-4: 1rem;
+  --ngx-space-5: 1.25rem;
+  --ngx-space-6: 1.5rem;
+  --ngx-space-8: 2rem;
+  --ngx-space-10: 2.5rem;
+  --ngx-space-12: 3rem;
+  --ngx-space-16: 4rem;
+
+  /* Typography */
+  --ngx-font-family-base: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --ngx-font-size-xs: 0.75rem;
+  --ngx-font-size-sm: 0.875rem;
+  --ngx-font-size-md: 1rem;
+  --ngx-font-size-lg: 1.125rem;
+  --ngx-font-size-xl: 1.25rem;
+  --ngx-font-size-2xl: 1.5rem;
+  --ngx-font-size-3xl: 1.875rem;
+
+  --ngx-font-weight-normal: 400;
+  --ngx-font-weight-medium: 500;
+  --ngx-font-weight-semibold: 600;
+  --ngx-font-weight-bold: 700;
+
+  --ngx-line-height-tight: 1.25;
+  --ngx-line-height-normal: 1.5;
+  --ngx-line-height-relaxed: 1.75;
+
+  /* Borders and elevation */
+  --ngx-radius-sm: 0.25rem;
+  --ngx-radius-md: 0.5rem;
+  --ngx-radius-lg: 0.75rem;
+  --ngx-radius-full: 9999px;
+
+  --ngx-border-width: 1px;
+
+  --ngx-shadow-sm: 0 1px 2px rgb(15 23 42 / 8%);
+  --ngx-shadow-md: 0 4px 12px rgb(15 23 42 / 10%);
+  --ngx-shadow-lg: 0 12px 32px rgb(15 23 42 / 14%);
+
+  /* Layering */
+  --ngx-z-dropdown: 1000;
+  --ngx-z-sticky: 1100;
+  --ngx-z-overlay: 1200;
+  --ngx-z-modal: 1300;
+  --ngx-z-tooltip: 1400;
+}

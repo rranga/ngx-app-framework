@@ -1,0 +1,105 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  color: var(--ngx-color-text);
+  background: var(--ngx-color-background);
+}
+
+.token-demo {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: var(--ngx-space-8) var(--ngx-space-4);
+}
+
+.page-header {
+  margin-bottom: var(--ngx-space-8);
+}
+
+.eyebrow {
+  color: var(--ngx-color-primary);
+  font-size: var(--ngx-font-size-sm);
+  font-weight: var(--ngx-font-weight-semibold);
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  margin-block: var(--ngx-space-2);
+  font-size: var(--ngx-font-size-3xl);
+}
+
+.description {
+  color: var(--ngx-color-text-muted);
+  line-height: var(--ngx-line-height-relaxed);
+}
+
+.token-card {
+  padding: var(--ngx-space-6);
+  background: var(--ngx-color-surface);
+  border: var(--ngx-border-width) solid var(--ngx-color-border);
+  border-radius: var(--ngx-radius-lg);
+  box-shadow: var(--ngx-shadow-sm);
+}
+
+.token-card h2 {
+  margin-top: 0;
+  font-size: var(--ngx-font-size-xl);
+}
+
+.token-card p {
+  line-height: var(--ngx-line-height-normal);
+}
+
+.token-details {
+  display: grid;
+  gap: var(--ngx-space-4);
+  margin-block: var(--ngx-space-6);
+}
+
+.token-details > div {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: var(--ngx-space-2);
+  align-items: center;
+}
+
+.token-details code {
+  grid-column: 2;
+  color: var(--ngx-color-text-muted);
+  font-size: var(--ngx-font-size-sm);
+}
+
+.swatch {
+  width: 20px;
+  height: 20px;
+  border: var(--ngx-border-width) solid var(--ngx-color-border);
+  border-radius: var(--ngx-radius-sm);
+}
+
+.primary-swatch {
+  background: var(--ngx-color-primary);
+}
+
+.surface-swatch {
+  background: var(--ngx-color-surface);
+}
+
+.demo-button {
+  padding: var(--ngx-space-3) var(--ngx-space-5);
+  color: white;
+  background: var(--ngx-color-primary);
+  border: 0;
+  border-radius: var(--ngx-radius-md);
+  font: inherit;
+  font-weight: var(--ngx-font-weight-medium);
+  cursor: pointer;
+}
+
+.demo-button:hover {
+  background: var(--ngx-color-primary-hover);
+}
+
+.demo-button:focus-visible {
+  outline: 2px solid var(--ngx-color-focus-ring);
+  outline-offset: 3px;
+}

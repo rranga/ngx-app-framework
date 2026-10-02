@@ -1,2 +1,42 @@
-<ngx-nx-welcome></ngx-nx-welcome>
-<router-outlet></router-outlet>
+<main
+  class="token-demo"
+  aria-labelledby="page-title"
+  [attr.data-ngx-theme]="isDarkTheme() ? 'dark' : null"
+>
+  <header class="page-header">
+    <p class="eyebrow">NGX APP FRAMEWORK</p>
+    <h1 id="page-title">Design Tokens</h1>
+    <p class="description">
+      A visual smoke test for our native CSS design system.
+    </p>
+    <button type="button" class="demo-button" (click)="toggleTheme()">
+      Switch to {{ isDarkTheme() ? 'light' : 'dark' }} theme
+    </button>
+  </header>
+
+  <section class="token-card" aria-labelledby="card-title">
+    <h2 id="card-title">Token integration successful</h2>
+    <p>
+      This card uses CSS custom properties from
+      <code>@rranga/ngx-design-tokens</code>.
+    </p>
+
+    <div class="token-details">
+      <div>
+        <span class="swatch primary-swatch" aria-hidden="true"></span>
+        <span>Primary color</span>
+        <code>--ngx-color-primary</code>
+      </div>
+
+      <div>
+        <span class="swatch surface-swatch" aria-hidden="true"></span>
+        <span>Surface color</span>
+        <code>--ngx-color-surface</code>
+      </div>
+    </div>
+
+    <button type="button" class="demo-button">Sample button</button>
+  </section>
+
+  <router-outlet></router-outlet>
+</main>
