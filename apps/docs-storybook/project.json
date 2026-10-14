@@ -81,6 +81,53 @@
         "staticFilePath": "dist/apps/docs-storybook/browser",
         "spa": true
       }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/docs-storybook/.storybook",
+        "browserTarget": "docs-storybook:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "options": {
+        "outputDir": "dist/storybook/docs-storybook",
+        "configDir": "apps/docs-storybook/.storybook",
+        "browserTarget": "docs-storybook:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": [
+        "build-storybook"
+      ],
+      "options": {
+        "buildTarget": "docs-storybook:build-storybook",
+        "staticFilePath": "dist/storybook/docs-storybook",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "docs-storybook:build-storybook:ci"
+        }
+      }
     }
   }
 }
