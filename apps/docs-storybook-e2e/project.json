@@ -1,0 +1,11 @@
+{
+  "name": "docs-storybook-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/docs-storybook-e2e/src",
+  "implicitDependencies": [
+    "docs-storybook"
+  ],
+  "// targets": "to see all targets run: nx show project docs-storybook-e2e --web",
+  "targets": {}
+}

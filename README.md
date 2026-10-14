@@ -30,14 +30,16 @@ The goal is to provide reusable, accessible, themeable UI components and shared 
 | Vitest-based Angular testing | Unit testing                                 |
 | Playwright                   | Browser-based end-to-end testing             |
 
-Storybook, visual regression workflows, and package publishing are planned capabilities; their implementation status should be updated as those phases are completed.
+Storybook is being introduced in Phase 03. The `@nx/storybook` Nx plugin is installed, and the separate `docs-storybook` Angular app plus `docs-storybook-e2e` Playwright project have been generated. Storybook's framework packages and project configuration have **not yet been applied**; visual regression workflows and package publishing remain future work.
 
 ## Repository Structure
 
 ```text
 ngx-app-framework/
 ├── apps/
-│   └── host/                 # Host application and integration testing
+│   ├── host/                 # Host application and integration testing
+│   └── docs-storybook/       # Angular app intended to host Storybook docs
+├── apps/docs-storybook-e2e/  # Playwright E2E tests for the docs app
 ├── libs/
 │   └── design-tokens/        # Shared CSS design-token foundation
 ├── docs/                     # Technical and phase documentation
@@ -93,6 +95,14 @@ http://localhost:4200/
 
 The Host application currently provides a design-token smoke-test page with light and dark theme behavior.
 
+### 5. Run the documentation app
+
+```bash
+npx nx serve docs-storybook
+```
+
+The `docs-storybook` Angular application has been scaffolded as the dedicated home for Storybook documentation. **Storybook configuration is not yet complete**, so this command currently serves the Angular starter app rather than a configured Storybook instance.
+
 ## Common Development Commands
 
 Run commands from the repository root.
@@ -111,15 +121,22 @@ npx nx lint host
 npx nx build design-tokens
 ```
 
-### End-to-end testing
-
-Check the configured E2E project name with:
+### Documentation app and E2E
 
 ```bash
-npx nx show projects
+npx nx build docs-storybook
+npx nx test docs-storybook
+npx nx lint docs-storybook
+npx nx e2e docs-storybook-e2e
 ```
 
-Then run its E2E target using the project name shown in the workspace.
+The documentation app has a companion Playwright project named `docs-storybook-e2e`.
+
+### Host end-to-end testing
+
+```bash
+npx nx e2e host-e2e
+```
 
 ## Design Tokens
 
@@ -149,7 +166,6 @@ See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation detai
 
 - [Workspace Foundation — Phase 01](docs/workspace-foundation.md)
 - [Design Tokens — Phase 02](docs/design-tokens.md)
-- [Implementation Roadmap](docs/implementation-roadmap.md) — include this link when the roadmap file exists.
 
 ## Development Principles
 
@@ -159,6 +175,18 @@ See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation detai
 - **Consistency:** Use shared design tokens rather than duplicating styling values.
 - **Quality:** Validate changes with builds, linting, unit tests, and appropriate browser tests.
 - **Incremental delivery:** Implement, verify, document, and commit each phase separately.
+
+## Phase 03 — Storybook Setup (in progress)
+
+The dedicated documentation app and its E2E project have been scaffolded:
+
+- `apps/docs-storybook/` — Angular application intended to host the component documentation.
+- `apps/docs-storybook-e2e/` — Playwright E2E project for the documentation app.
+- `@nx/storybook@23.2.1` — Nx Storybook plugin aligned with the workspace's Nx version.
+
+The projects were verified with `npx nx show project docs-storybook --json` and `npx nx show project docs-storybook-e2e --json`. The documentation app has standard Angular targets (`build`, `serve`, `test`, and `lint`), while its E2E project has Playwright targets.
+
+**Current status:** Storybook has not been configured yet. The next step is to preview the Angular Storybook configuration generator against `docs-storybook`, review its proposed changes, and then apply a compatible configuration. Prefer Nx's inferred Storybook plugin targets over deprecated `@nx/storybook:storybook` and `@nx/storybook:build` executors. Keep the existing `host` app separate from the documentation app.
 
 ## Planned Development
 
