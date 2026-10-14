@@ -4,7 +4,7 @@ A native-first Angular application framework and reusable UI component library b
 
 The goal is to provide reusable, accessible, themeable UI components and shared application-development capabilities for enterprise Angular applications.
 
-> **Development status:** Workspace foundation and initial design-token foundation implemented. Storybook integration, the reusable component library, and application development kit are planned for subsequent phases.
+> **Development status:** Phases 01–02 (workspace and design-token foundations) are complete. Phase 03 Storybook setup is implemented and verified locally. The shared field and reusable component library are planned for the next phases.
 
 ## Project Goals
 
@@ -30,7 +30,7 @@ The goal is to provide reusable, accessible, themeable UI components and shared 
 | Vitest-based Angular testing | Unit testing                                 |
 | Playwright                   | Browser-based end-to-end testing             |
 
-Storybook is being introduced in Phase 03. The `@nx/storybook` Nx plugin is installed, and the separate `docs-storybook` Angular app plus `docs-storybook-e2e` Playwright project have been generated. Storybook's framework packages and project configuration have **not yet been applied**; visual regression workflows and package publishing remain future work.
+Storybook 10 is configured in the `docs-storybook` Angular app. The Welcome story, design-token color preview, and dark-theme preview have been verified locally. Visual regression workflows and package publishing remain future work.
 
 ## Repository Structure
 
@@ -95,13 +95,13 @@ http://localhost:4200/
 
 The Host application currently provides a design-token smoke-test page with light and dark theme behavior.
 
-### 5. Run the documentation app
+### 5. Run Storybook
 
 ```bash
-npx nx serve docs-storybook
+npx nx run docs-storybook:storybook
 ```
 
-The `docs-storybook` Angular application has been scaffolded as the dedicated home for Storybook documentation. **Storybook configuration is not yet complete**, so this command currently serves the Angular starter app rather than a configured Storybook instance.
+Open `http://localhost:4400/`. The `docs-storybook` project hosts the Storybook UI and component documentation. To build a static Storybook site, run `npx nx run docs-storybook:build-storybook`.
 
 ## Common Development Commands
 
@@ -167,6 +167,8 @@ See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation detai
 - [Workspace Foundation — Phase 01](docs/workspace-foundation.md)
 - [Design Tokens — Phase 02](docs/design-tokens.md)
 
+Phase 03 Storybook setup and previews are documented in the section below. Phase-specific documentation will be added as subsequent phases are implemented.
+
 ## Development Principles
 
 - **Native-first UI:** Prefer native HTML and CSS rather than depending on a third-party visual component library.
@@ -176,17 +178,26 @@ See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation detai
 - **Quality:** Validate changes with builds, linting, unit tests, and appropriate browser tests.
 - **Incremental delivery:** Implement, verify, document, and commit each phase separately.
 
-## Phase 03 — Storybook Setup (in progress)
+## Phase 03 — Storybook Setup (verified locally)
 
-The dedicated documentation app and its E2E project have been scaffolded:
+The dedicated documentation app and its E2E project are in place:
 
-- `apps/docs-storybook/` — Angular application intended to host the component documentation.
+- `apps/docs-storybook/` — Angular application hosting Storybook documentation.
 - `apps/docs-storybook-e2e/` — Playwright E2E project for the documentation app.
 - `@nx/storybook@23.2.1` — Nx Storybook plugin aligned with the workspace's Nx version.
 
-The projects were verified with `npx nx show project docs-storybook --json` and `npx nx show project docs-storybook-e2e --json`. The documentation app has standard Angular targets (`build`, `serve`, `test`, and `lint`), while its E2E project has Playwright targets.
+**Implemented and verified locally:**
 
-**Current status:** Storybook has not been configured yet. The next step is to preview the Angular Storybook configuration generator against `docs-storybook`, review its proposed changes, and then apply a compatible configuration. Prefer Nx's inferred Storybook plugin targets over deprecated `@nx/storybook:storybook` and `@nx/storybook:build` executors. Keep the existing `host` app separate from the documentation app.
+- Storybook starts with `npx nx run docs-storybook:storybook` on `http://localhost:4400/`.
+- `Getting Started/Welcome` renders successfully.
+- `Design System/Design Tokens` previews five color tokens from the shared CSS custom properties.
+- `Design System/Themes` previews the dark theme using `[data-ngx-theme="dark"]`.
+- `npx nx build design-tokens` completed successfully.
+- The Storybook static build completed successfully.
+
+The Storybook preview loads the existing CSS from `libs/design-tokens/src/lib/styles/` through `apps/docs-storybook/src/styles.scss`. The Host app remains separate from the documentation app. The local Verdaccio registry is configured as development tooling; package publishing has not yet been verified. Visual regression testing remains future work.
+
+**Status:** Phase 03 is implemented and verified locally. The next planned work is Phase 04 — Shared Field.
 
 ## Planned Development
 
