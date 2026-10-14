@@ -1,0 +1,23 @@
+<div class="ngx-field">
+  <label class="ngx-field__label" [for]="id()">
+    {{ label() }} @if (required()) {
+    <span class="ngx-field__required" aria-hidden="true">*</span>
+    }
+  </label>
+
+  <div
+    class="ngx-field__control"
+    [attr.data-invalid]="error() ? 'true' : null"
+    [attr.data-required]="required() ? 'true' : null"
+  >
+    <ng-content />
+  </div>
+
+  @if (hint(); as hintText) {
+  <p class="ngx-field__hint" [id]="id() + '-hint'">{{ hintText }}</p>
+  } @if (error(); as errorText) {
+  <p class="ngx-field__error" [id]="id() + '-error'" role="alert">
+    {{ errorText }}
+  </p>
+  }
+</div>

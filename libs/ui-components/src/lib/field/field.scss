@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  font-family: var(--ngx-font-family-base);
+}
+
+.ngx-field {
+  display: grid;
+  gap: var(--ngx-space-2);
+  color: var(--ngx-color-text);
+}
+
+.ngx-field__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--ngx-space-1);
+  font-size: var(--ngx-font-size-sm);
+  font-weight: var(--ngx-font-weight-medium);
+}
+
+.ngx-field__required {
+  color: var(--ngx-color-error);
+}
+
+.ngx-field__control {
+  min-width: 0;
+}
+
+.ngx-field__hint,
+.ngx-field__error {
+  margin: 0;
+  font-size: var(--ngx-font-size-sm);
+  line-height: var(--ngx-line-height-normal);
+}
+
+.ngx-field__hint {
+  color: var(--ngx-color-text-muted);
+}
+
+.ngx-field__error {
+  color: var(--ngx-color-error);
+}
+
+.ngx-field__control[data-invalid='true'] {
+  --ngx-field-control-border: var(--ngx-color-error);
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@rranga/ngx-ui-components",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": "^22.1.0"
+  },
+  "sideEffects": false,
+  "private": true
+}
