@@ -57,6 +57,26 @@ describe('FieldControl', () => {
     expect(input.hasAttribute('required')).toBe(true);
   });
 
+  it('should associate the label with the native control, not the field host', () => {
+    const input: HTMLInputElement =
+      fixture.nativeElement.querySelector('input');
+    const label: HTMLLabelElement =
+      fixture.nativeElement.querySelector('label');
+
+    expect(fixture.nativeElement.querySelectorAll('#email')).toHaveLength(1);
+    expect(label.control).toBe(input);
+  });
+
+  it('should drop the error id from aria-describedby when the error is cleared', () => {
+    fixture.componentInstance.error.set('');
+    fixture.detectChanges();
+
+    const input: HTMLInputElement =
+      fixture.nativeElement.querySelector('input');
+
+    expect(input.getAttribute('aria-describedby')).toBe('email-hint');
+  });
+
   it('should remove aria-invalid when the error is cleared', () => {
     fixture.componentInstance.error.set('');
     fixture.detectChanges();

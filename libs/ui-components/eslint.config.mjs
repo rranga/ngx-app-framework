@@ -1,4 +1,5 @@
 import nx from "@nx/eslint-plugin";
+import angular from "angular-eslint";
 import baseConfig from "../../eslint.config.mjs";
 
 export default [
@@ -43,14 +44,21 @@ export default [
                     prefix: "ngx",
                     style: "kebab-case"
                 }
-            ]
+            ],
+            // Library components must work in OnPush/zoneless applications.
+            "@angular-eslint/prefer-on-push-component-change-detection": "error",
+            "@angular-eslint/prefer-output-readonly": "error"
         }
     },
+    // Accessibility is a release requirement for the component library.
+    ...angular.configs.templateAccessibility.map((config) => ({
+        ...config,
+        files: ["**/*.html"]
+    })),
     {
         files: [
             "**/*.html"
         ],
-        // Override or add rules here
         rules: {}
     }
 ];
