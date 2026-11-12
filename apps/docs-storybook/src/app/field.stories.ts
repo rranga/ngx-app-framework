@@ -1,57 +1,59 @@
-
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { Field, FieldControl } from '@rranga/ngx-ui-components';
+import { Field, FieldControl, Input } from '@rranga/ngx-ui-components';
+import { SHOWCASE_STYLES } from './story-helpers';
 
 @Component({
-  selector: 'ngx-field-showcase',
-  standalone: true,
-  imports: [Field, FieldControl],
+  selector: 'ngx-docs-field-showcase',
+  imports: [Field, FieldControl, Input],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    SHOWCASE_STYLES,
+    `
+      .native-control {
+        box-sizing: border-box;
+        width: 100%;
+        padding: var(--ngx-space-3);
+        font: inherit;
+        border: var(--ngx-border-width) solid var(--ngx-field-control-border, var(--ngx-color-border));
+        border-radius: var(--ngx-radius-md);
+      }
+    `,
+  ],
   template: `
-    <div
-      style="
-        display: grid;
-        gap: var(--ngx-space-6);
-        max-width: 420px;
-        font-family: var(--ngx-font-family-base);
-        color: var(--ngx-color-text);
-      "
-    >
+    <section>
+      <h3>With a library control</h3>
+      <p>ngx-input inherits the id, hint, error and required state automatically.</p>
       <ngx-field
-        id="name"
+        id="field-name"
         label="Full name"
         hint="Enter your first and last name."
         [required]="true"
       >
-        <input
-          id="name"
-          type="text"
-          ngxFieldControl
-          placeholder="Jane Doe"
-          style="width: 100%; box-sizing: border-box; padding: 10px;"
-        />
+        <ngx-input placeholder="Jane Doe" autocomplete="name" />
       </ngx-field>
+    </section>
 
+    <section>
+      <h3>With a native control</h3>
+      <p>Native elements opt in with the ngxFieldControl directive.</p>
       <ngx-field
-        id="email"
+        id="field-email"
         label="Email address"
         hint="Use your work email."
         [error]="emailError()"
         [required]="true"
       >
         <input
-          id="email"
+          id="field-email"
+          class="native-control"
           type="email"
           ngxFieldControl
           placeholder="jane@example.com"
-          style="width: 100%; box-sizing: border-box; padding: 10px;"
         />
       </ngx-field>
-
-      <button type="button" (click)="toggleError()">
-        Toggle email error
-      </button>
-    </div>
+      <button type="button" (click)="toggleError()">Toggle email error</button>
+    </section>
   `,
 })
 class FieldShowcase {
@@ -65,7 +67,7 @@ class FieldShowcase {
 }
 
 const meta: Meta = {
-  title: 'Design System/Field',
+  title: 'Design System/Forms/Field',
   tags: ['autodocs'],
 };
 
@@ -75,9 +77,7 @@ type Story = StoryObj;
 
 export const Examples: Story = {
   render: () => ({
-    moduleMetadata: {
-      imports: [FieldShowcase],
-    },
-    template: '<ngx-field-showcase />',
+    moduleMetadata: { imports: [FieldShowcase] },
+    template: '<ngx-docs-field-showcase />',
   }),
 };
