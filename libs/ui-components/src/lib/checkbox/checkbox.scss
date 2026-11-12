@@ -1,0 +1,17 @@
+@use '../forms/control';
+
+:host {
+  display: block;
+}
+
+.ngx-checkbox {
+  @include control.choice-row;
+}
+
+.ngx-checkbox__input {
+  @include control.choice-input;
+}
+
+.ngx-checkbox__label {
+  @include control.choice-label('.ngx-checkbox--disabled');
+}

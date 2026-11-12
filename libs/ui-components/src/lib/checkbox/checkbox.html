@@ -1,0 +1,21 @@
+<div class="ngx-checkbox" [class.ngx-checkbox--disabled]="state.disabled()">
+  <input
+    #control
+    type="checkbox"
+    class="ngx-checkbox__input"
+    [id]="controlId()"
+    [checked]="checked()"
+    [indeterminate]="indeterminate()"
+    [disabled]="state.disabled()"
+    [required]="state.required()"
+    [attr.name]="name() || null"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-describedby]="describedBy()"
+    [attr.aria-invalid]="presentedInvalid() ? 'true' : null"
+    (change)="onChange()"
+    (blur)="onBlur()"
+  />
+  <label class="ngx-checkbox__label" [for]="controlId()">
+    <ng-content />
+  </label>
+</div>
