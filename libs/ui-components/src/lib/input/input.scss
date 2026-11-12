@@ -1,0 +1,11 @@
+@use '../forms/control';
+
+:host {
+  display: block;
+  width: 100%;
+  font-family: var(--ngx-font-family-base);
+}
+
+.ngx-input {
+  @include control.surface;
+}

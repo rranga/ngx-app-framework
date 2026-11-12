@@ -2,6 +2,9 @@
 export * from './lib/field/field';
 export * from './lib/field/field-control';
 
+// Form controls
+export * from './lib/input/input';
+
 // Forms integration
 export {
   NGX_FIELD_CONTEXT,
