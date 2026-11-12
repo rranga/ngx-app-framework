@@ -1,0 +1,21 @@
+<textarea
+  #control
+  class="ngx-textarea"
+  [id]="a11y.controlId()"
+  [rows]="rows()"
+  [style.resize]="resize()"
+  [disabled]="state.disabled()"
+  [readOnly]="readonly()"
+  [required]="a11y.required()"
+  [attr.name]="name() || null"
+  [attr.placeholder]="placeholder() || null"
+  [attr.autocomplete]="autocomplete()"
+  [attr.minlength]="minLength() ?? null"
+  [attr.maxlength]="maxLength() ?? null"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-labelledby]="ariaLabelledBy()"
+  [attr.aria-describedby]="a11y.describedBy()"
+  [attr.aria-invalid]="a11y.invalid() ? 'true' : null"
+  (input)="onInput()"
+  (blur)="onBlur()"
+></textarea>
