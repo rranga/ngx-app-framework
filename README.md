@@ -4,7 +4,7 @@ A native-first Angular application framework and reusable UI component library b
 
 The goal is to provide reusable, accessible, themeable UI components and shared application-development capabilities for enterprise Angular applications.
 
-> **Development status:** Phases 01–04 have been implemented and verified locally. Phase 04 introduces the buildable `@rranga/ngx-ui-components` library, the shared `ngx-field` component, the `ngxFieldControl` accessibility directive, and a Storybook example. Visual regression workflows, broader component coverage, CI, and package publishing remain future work.
+> **Development status:** Phases 01–04 are complete. Phase 05 (Tier-1 form controls: Input, Textarea, Select, Checkbox, Radio Group) is implemented and verified locally and is awaiting review before it is marked complete. Visual regression workflows, broader component coverage, CI, and package publishing remain future work.
 
 ## Project Goals
 
@@ -136,8 +136,9 @@ npx nx lint ui-components
 ### Storybook and E2E
 
 ```bash
-npx nx run docs-storybook:storybook
-npx nx run docs-storybook:build
+npx nx run docs-storybook:storybook        # dev server (http://localhost:4400)
+npx nx run docs-storybook:build-storybook  # Storybook production build
+npx nx run docs-storybook:build            # docs Angular app build
 npx nx e2e docs-storybook-e2e
 ```
 
@@ -177,61 +178,53 @@ See [Design Tokens — Phase 02](docs/design-tokens.md) for implementation detai
 
 The buildable Angular library is located at `libs/ui-components/`. Its package name is `@rranga/ngx-ui-components`. The library is designed to use native HTML, CSS/SCSS, Angular, and the workspace's design tokens rather than relying on a third-party visual component library.
 
-### Shared Field
+### Form controls
 
-The initial shared field component is exported as `Field`, with the selector `ngx-field`. It provides:
-
-- A label associated with the supplied control ID.
-- An optional required indicator.
-- Optional hint text.
-- Optional error text with `role="alert"`.
-- A computed `describedBy` value containing the hint and error element IDs when present.
-- `OnPush` change detection and Angular signal inputs.
-
-The field is a layout and accessibility foundation. Individual controls remain responsible for their own values and form behavior.
-
-### FieldControl directive
-
-`FieldControl` is exported from the library and uses the `[ngxFieldControl]` attribute selector. Apply it to a projected control inside `ngx-field` to synchronize:
-
-- `aria-describedby` with the field's hint and error IDs.
-- `aria-invalid` with the field's error state.
-- The native `required` attribute with the field's required state.
-
-Example consumer usage:
+| Component | Selector | Purpose |
+| --- | --- | --- |
+| `Field` | `ngx-field` | Label, required indicator, hint and error for one control. |
+| `FieldControl` | `[ngxFieldControl]` | Connects a projected *native* control to its field's ARIA state. |
+| `Input` | `ngx-input` | Text, email, password, number, tel, url and search input. |
+| `Textarea` | `ngx-textarea` | Multi-line text with a resize policy. |
+| `Select` | `ngx-select` | Native single-value select with typed options. |
+| `Checkbox` | `ngx-checkbox` | Boolean choice with an indeterminate state. |
+| `RadioGroup` / `Radio` | `ngx-radio-group` / `ngx-radio` | Labelled group of native radios. |
+| `FormControlAccessor` | `ngx-*[formControlName]`, `[formControl]`, `[ngModel]` | Connects the controls to Reactive and template-driven forms. |
 
 ```typescript
-import { Component } from "@angular/core";
-import { Field, FieldControl } from "@rranga/ngx-ui-components";
+import { Component, signal } from '@angular/core';
+import { Field, Input } from '@rranga/ngx-ui-components';
 
 @Component({
-  standalone: true,
-  imports: [Field, FieldControl],
+  selector: 'app-profile',
+  imports: [Field, Input],
   template: `
-    <ngx-field id="email" label="Email address" hint="Use your work email." [error]="emailError" [required]="true">
-      <input id="email" type="email" ngxFieldControl />
+    <ngx-field id="email" label="Email address" hint="Use your work email." [error]="emailError()" required>
+      <ngx-input type="email" autocomplete="email" [(value)]="email" />
     </ngx-field>
   `,
 })
-export class ExampleComponent {
-  emailError = "";
+export class Profile {
+  readonly email = signal('');
+  readonly emailError = signal('');
 }
 ```
 
-Import both `Field` and `FieldControl` into the consumer component that declares the projected input. Use unique IDs for each control. For complex forms, ensure error state is driven by the form's validation logic.
+Inside `ngx-field`, library controls inherit the id, `aria-describedby`, error state and `required` automatically. Native elements use `ngxFieldControl`. The controls use native constraint validation and expose a `validity()` signal with error keys (the application owns message text). They work with Angular Signal Forms (`[formField]`), and with Reactive Forms and `ngModel` when you import `FormControlAccessor`.
 
-### Storybook example
+See **[Form Controls — Phase 05](docs/form-controls.md)** for the full API, validation behaviour (including the telephone and number policies), forms integration and the accessibility contract.
 
-The Shared Field story is located at `apps/docs-storybook/src/app/field.stories.ts`.
+### Storybook examples
 
-In Storybook, open **Design System → Field → Examples** to preview the name and email fields and use the toggle button to show or clear the email error.
+Stories live in `apps/docs-storybook/src/app/*.stories.ts` under **Design System → Forms**: Field, Input (types, states, validation), Textarea, Select, Checkbox, Radio Group, plus Signal Forms and Reactive Forms integration forms.
 
 ## Documentation
 
 - [Workspace Foundation — Phase 01](docs/workspace-foundation.md)
 - [Design Tokens — Phase 02](docs/design-tokens.md)
+- [Form Controls — Phase 05](docs/form-controls.md)
 
-Phase 03 and Phase 04 implementation details are summarized below. Additional phase-specific documentation can be added as the framework grows.
+Phase 03 to Phase 05 implementation details are summarized below. Additional phase-specific documentation can be added as the framework grows.
 
 ## Development Principles
 
@@ -269,11 +262,48 @@ The Storybook preview loads the existing CSS from `libs/design-tokens/src/lib/st
 - Added the standalone `ngx-field` component with label, required indicator, hint, error, and computed description IDs.
 - Added and exported the standalone `FieldControl` directive using the `[ngxFieldControl]` selector.
 - Added unit tests for field rendering and projected-control accessibility behavior.
-- Added a Storybook example at `Design System/Field/Examples`.
+- Added a Storybook example at `Design System/Field/Examples` (moved to `Design System/Forms/Field` in Phase 05).
 - Verified that the field example renders and the email error can be toggled interactively.
 - Verified the UI library tests, production build, lint, and Storybook production build.
 
 The UI library test suite currently contains 11 passing tests across three test files. These checks validate the initial foundation, not every possible browser, assistive-technology, or form-integration scenario. Further controls, accessibility testing, and documentation remain planned.
+
+## Phase 05 — Tier-1 Form Controls
+
+**Status:** implemented and verified locally; awaiting review before the phase is marked complete.
+
+**Implemented:**
+
+- `Input` completed with typed constraint inputs (`minLength`, `maxLength`, `min`, `max`, `step`, `pattern`, `inputMode`, `name`), a `validity()` signal, `touched`/`touch`, and `focus()`.
+- New `Textarea`, `Select`, `Checkbox`, and `RadioGroup`/`Radio` components with the same contract.
+- `NGX_FIELD_CONTEXT`, an explicit, tested integration contract between `ngx-field` and controls.
+- Structural compatibility with Angular Signal Forms (`[formField]`), covered by an integration test.
+- `FormControlAccessor` for Reactive Forms (`formControlName`, `[formControl]`) and template-driven forms (`ngModel`). It mirrors disabled, required, touched and submitted state from the `FormControl`, and is scoped by selector so it never competes with Signal Forms. `@angular/forms` is now a peer dependency.
+- Separate stories for every control, all using the `ngx-docs-` story selector prefix.
+
+**Fixes to earlier work:**
+
+- `ngx-field id="…"` duplicated the id on the host element, so `<label for>` resolved to the host instead of the control. Hosts no longer carry the id.
+- `FieldControl` now uses signal-based `host` bindings instead of `@HostBinding` getters plus a `markForCheck` effect.
+- Story selectors now satisfy the docs app's `ngx-docs` prefix lint rule.
+
+**Verified:** 121 unit tests across 11 files; `ui-components` build and lint; `docs-storybook` lint, app build and Storybook production build; all 10 Forms stories rendered in Chromium in light and dark themes with no console errors; browser checks of validation, label association, Signal Forms and Reactive Forms submit/reset/disable, and radio-group keyboard navigation.
+
+## Troubleshooting
+
+### `Vitest failed to find the runner`
+
+If every spec fails with this error, check for an `NX_WORKSPACE_ROOT_PATH` environment variable whose drive-letter case differs from the real path (for example `e:\…` instead of `E:\…`). Some editor integrations set it. Nx then loads Vitest from `e:/…` while Vite resolves imports to `E:/…`, creating two Vitest instances. Unset it for the session:
+
+```bash
+# Git Bash
+env -u NX_WORKSPACE_ROOT_PATH npx nx test ui-components --skip-nx-cache
+```
+
+```powershell
+# PowerShell
+Remove-Item Env:NX_WORKSPACE_ROOT_PATH; npx nx test ui-components --skip-nx-cache
+```
 
 ## Planned Development
 
