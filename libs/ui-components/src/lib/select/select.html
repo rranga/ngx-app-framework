@@ -1,0 +1,30 @@
+<div class="ngx-select">
+  <select
+    #control
+    class="ngx-select__control"
+    [id]="a11y.controlId()"
+    [disabled]="state.disabled()"
+    [required]="a11y.required()"
+    [attr.name]="name() || null"
+    [attr.autocomplete]="autocomplete()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-labelledby]="ariaLabelledBy()"
+    [attr.aria-describedby]="a11y.describedBy()"
+    [attr.aria-invalid]="a11y.invalid() ? 'true' : null"
+    (change)="onChange()"
+    (blur)="onBlur()"
+  >
+    @if (placeholder(); as placeholderText) {
+      <option value="" [selected]="value() === ''">{{ placeholderText }}</option>
+    }
+    @for (option of options(); track option.value) {
+      <option
+        [value]="option.value"
+        [disabled]="option.disabled ?? false"
+        [selected]="option.value === value()"
+      >
+        {{ option.label }}
+      </option>
+    }
+  </select>
+</div>

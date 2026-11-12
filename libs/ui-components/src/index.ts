@@ -5,6 +5,7 @@ export * from './lib/field/field-control';
 // Form controls
 export * from './lib/input/input';
 export * from './lib/textarea/textarea';
+export * from './lib/select/select';
 
 // Forms integration
 export {
