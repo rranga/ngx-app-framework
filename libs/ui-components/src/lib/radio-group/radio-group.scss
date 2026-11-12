@@ -1,0 +1,44 @@
+@use '../forms/field-text';
+
+:host {
+  display: block;
+  font-family: var(--ngx-font-family-base);
+}
+
+.ngx-radio-group {
+  display: grid;
+  gap: var(--ngx-space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--ngx-color-text);
+}
+
+.ngx-radio-group__label {
+  @include field-text.label;
+  margin-bottom: var(--ngx-space-1);
+}
+
+.ngx-radio-group__required {
+  @include field-text.required-indicator;
+}
+
+.ngx-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ngx-space-2);
+
+  &--horizontal {
+    flex-flow: row wrap;
+    gap: var(--ngx-space-2) var(--ngx-space-6);
+  }
+}
+
+.ngx-radio-group__hint {
+  @include field-text.hint;
+}
+
+.ngx-radio-group__error {
+  @include field-text.error;
+}

@@ -7,6 +7,8 @@ export * from './lib/input/input';
 export * from './lib/textarea/textarea';
 export * from './lib/select/select';
 export * from './lib/checkbox/checkbox';
+export * from './lib/radio-group/radio-group';
+export * from './lib/radio-group/radio';
 
 // Forms integration
 export {

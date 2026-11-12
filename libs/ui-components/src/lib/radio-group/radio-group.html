@@ -1,0 +1,32 @@
+<fieldset
+  class="ngx-radio-group"
+  role="radiogroup"
+  [disabled]="state.disabled()"
+  [attr.aria-labelledby]="legendId()"
+  [attr.aria-describedby]="ariaDescribedBy()"
+  [attr.aria-invalid]="isInvalid() ? 'true' : null"
+  [attr.aria-required]="state.required() ? 'true' : null"
+>
+  <legend class="ngx-radio-group__label" [id]="legendId()">
+    {{ label() }}
+    @if (state.required()) {
+      <span class="ngx-radio-group__required" aria-hidden="true">*</span>
+    }
+  </legend>
+
+  <div
+    class="ngx-radio-group__options"
+    [class.ngx-radio-group__options--horizontal]="orientation() === 'horizontal'"
+  >
+    <ng-content />
+  </div>
+
+  @if (hint(); as hintText) {
+    <p class="ngx-radio-group__hint" [id]="hintId()">{{ hintText }}</p>
+  }
+  @if (error(); as errorText) {
+    <p class="ngx-radio-group__error" [id]="errorId()" role="alert">
+      {{ errorText }}
+    </p>
+  }
+</fieldset>

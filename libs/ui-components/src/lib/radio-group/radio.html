@@ -1,0 +1,18 @@
+<div class="ngx-radio" [class.ngx-radio--disabled]="isDisabled()">
+  <input
+    #control
+    type="radio"
+    class="ngx-radio__input"
+    [id]="controlId()"
+    [name]="group.name()"
+    [value]="value()"
+    [checked]="checked()"
+    [disabled]="disabled()"
+    [required]="group.required()"
+    (change)="onChange()"
+    (blur)="group.markTouched()"
+  />
+  <label class="ngx-radio__label" [for]="controlId()">
+    <ng-content />
+  </label>
+</div>
