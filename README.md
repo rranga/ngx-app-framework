@@ -4,7 +4,9 @@ A native-first Angular application framework and reusable UI component library b
 
 The goal is to provide reusable, accessible, themeable UI components and shared application-development capabilities for enterprise Angular applications.
 
-> **Development status:** Phases 01–04 are complete. Phase 05 (Tier-1 form controls: Input, Textarea, Select, Checkbox, Radio Group) is implemented and verified locally and is awaiting review before it is marked complete. Visual regression workflows, broader component coverage, CI, and package publishing remain future work.
+> **Development status:** Phases 01–05 are complete, including the Tier-1 form controls (Input, Textarea, Select, Checkbox, Radio Group). Visual regression workflows, broader component coverage, full CI/CD, and package publishing remain future work.
+>
+> **Live Storybook:** https://rranga.github.io/ngx-app-framework/
 
 ## Project Goals
 
@@ -100,11 +102,22 @@ The Host application currently provides a design-token smoke-test page with ligh
 npx nx run docs-storybook:storybook
 ```
 
-Open `http://localhost:4400/`. To build the Storybook application, run:
+Open `http://localhost:4400/`. To create the static Storybook production build, run:
 
 ```bash
-npx nx run docs-storybook:build
+npx nx run docs-storybook:build-storybook
 ```
+
+### 6. Published Storybook (GitHub Pages)
+
+`.github/workflows/storybook.yml` publishes Storybook to **https://rranga.github.io/ngx-app-framework/**.
+
+- On pull requests it runs lint, the `ui-components` unit tests and build, and the Storybook build, and reports the result as a PR check. Nothing is deployed.
+- On pushes to `main` (or a manual run) it runs the same checks and, only if they pass, deploys Storybook to GitHub Pages.
+
+One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**. CI uses the Node version in `.nvmrc`.
+
+This workflow only verifies and publishes the documentation site; the full CI/CD pipeline (Jenkins) is planned for Phase 11.
 
 ## Common Development Commands
 
@@ -270,7 +283,7 @@ The UI library test suite currently contains 11 passing tests across three test 
 
 ## Phase 05 — Tier-1 Form Controls
 
-**Status:** implemented and verified locally; awaiting review before the phase is marked complete.
+**Status:** complete. Reviewed and merged in pull request #1.
 
 **Implemented:**
 
