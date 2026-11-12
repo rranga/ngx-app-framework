@@ -411,4 +411,4 @@ Make sure **Settings → Pages → Source** is set to **GitHub Actions**, then r
 
 ## License
 
-The root `package.json` declares `MIT`, but the repository does not yet include a `LICENSE` file. Add one before distributing the framework publicly as an open-source package.
+Released under the [MIT License](LICENSE). The `@rranga/ngx-ui-components` and `@rranga/ngx-design-tokens` packages are MIT-licensed, and their builds include the license file.
