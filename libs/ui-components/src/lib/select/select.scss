@@ -1,0 +1,42 @@
+@use '../forms/control';
+
+:host {
+  display: block;
+  width: 100%;
+  font-family: var(--ngx-font-family-base);
+}
+
+.ngx-select {
+  position: relative;
+
+  // Chevron drawn with borders so it inherits the text colour in every theme.
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: var(--ngx-space-4);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid var(--ngx-color-text-muted);
+    border-bottom: 2px solid var(--ngx-color-text-muted);
+    content: '';
+    pointer-events: none;
+    transform: translateY(-75%) rotate(45deg);
+  }
+}
+
+.ngx-select__control {
+  @include control.surface;
+  padding-right: var(--ngx-space-10);
+  appearance: none;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+// Native options are rendered by the platform; keep them readable in dark mode.
+.ngx-select__control option {
+  color: var(--ngx-color-text);
+  background: var(--ngx-color-surface-raised);
+}
