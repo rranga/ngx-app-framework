@@ -1,0 +1,17 @@
+@use '../forms/control';
+
+:host {
+  display: block;
+}
+
+.ngx-radio {
+  @include control.choice-row;
+}
+
+.ngx-radio__input {
+  @include control.choice-input;
+}
+
+.ngx-radio__label {
+  @include control.choice-label('.ngx-radio--disabled');
+}
