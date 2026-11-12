@@ -1,0 +1,104 @@
+// Shared visual contract for text-like native controls (input, textarea,
+// select). Every value comes from @rranga/ngx-design-tokens so controls
+// follow the active theme without component-specific overrides.
+
+@mixin surface {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: var(--ngx-space-3) var(--ngx-space-4);
+
+  color: var(--ngx-color-text);
+  background: var(--ngx-color-surface);
+  border: var(--ngx-border-width) solid
+    var(--ngx-field-control-border, var(--ngx-color-border));
+  border-radius: var(--ngx-radius-md);
+
+  font: inherit;
+  line-height: var(--ngx-line-height-normal);
+
+  transition:
+    border-color 150ms ease,
+    outline-color 150ms ease,
+    background-color 150ms ease;
+
+  &::placeholder {
+    color: var(--ngx-color-text-muted);
+    opacity: 1;
+  }
+
+  // Invalid controls keep their error border while hovered.
+  &:hover:not(:disabled, [readonly], [aria-invalid='true']) {
+    border-color: var(--ngx-color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ngx-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background: var(--ngx-color-background);
+  }
+
+  &[readonly] {
+    background: var(--ngx-color-background);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--ngx-color-error);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// Visible focus indicator for compact native controls (checkbox, radio).
+@mixin choice-input {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0.125rem 0 0;
+  accent-color: var(--ngx-color-primary);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--ngx-color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid='true'] {
+    outline: 2px solid var(--ngx-color-error);
+    outline-offset: 1px;
+  }
+}
+
+// Inline row of a choice input and its label.
+@mixin choice-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ngx-space-2);
+  font-family: var(--ngx-font-family-base);
+  font-size: var(--ngx-font-size-md);
+  line-height: var(--ngx-line-height-normal);
+  color: var(--ngx-color-text);
+}
+
+@mixin choice-label($disabled-selector) {
+  cursor: pointer;
+
+  #{$disabled-selector} & {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
