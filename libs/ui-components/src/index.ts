@@ -11,6 +11,7 @@ export * from './lib/radio-group/radio-group';
 export * from './lib/radio-group/radio';
 
 // Forms integration
+export * from './lib/forms/form-control-accessor';
 export {
   NGX_FIELD_CONTEXT,
   type FieldContext,
