@@ -157,7 +157,7 @@ The project is maintained in Git and hosted on GitHub.
 
 Repository:
 
-https://github.com/rranga/ngx-app-framework
+https://github.com/ranga-rekkamalla/ngx-app-framework
 
 Commit messages follow a conventional format:
 

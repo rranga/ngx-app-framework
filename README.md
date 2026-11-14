@@ -6,7 +6,7 @@ The goal is to provide reusable, accessible, themeable UI components and shared 
 
 > **Development status:** Phases 01–05 are complete. The workspace, design tokens, Storybook documentation, the shared Field primitive and the Tier-1 form controls (Input, Textarea, Select, Checkbox, Radio Group) are implemented, tested and documented. Phase 06 (Tier-2 composite components) is next.
 >
-> **Live Storybook:** https://rranga.github.io/ngx-app-framework/
+> **Live Storybook:** https://ranga-rekkamalla.github.io/ngx-app-framework/
 
 ## Contents
 
@@ -114,7 +114,7 @@ ngx-app-framework/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/rranga/ngx-app-framework.git
+git clone https://github.com/ranga-rekkamalla/ngx-app-framework.git
 cd ngx-app-framework
 ```
 
@@ -139,7 +139,7 @@ The workspace contains six projects: `host`, `host-e2e`, `docs-storybook`, `docs
 npx nx run docs-storybook:storybook
 ```
 
-Open `http://localhost:4400/`. The published version is at https://rranga.github.io/ngx-app-framework/.
+Open `http://localhost:4400/`. The published version is at https://ranga-rekkamalla.github.io/ngx-app-framework/.
 
 ### 5. Run the Host application
 
@@ -222,7 +222,7 @@ Starts Verdaccio on `http://localhost:4873` (storage in `tmp/local-registry`) fo
 | Pull request to `main` | Lint, `ui-components` unit tests and build, Storybook build. Results appear as a PR check; nothing is deployed. |
 | Push to `main` (or a manual run) | The same checks, then deployment to GitHub Pages only if they pass. |
 
-- **Site:** https://rranga.github.io/ngx-app-framework/
+- **Site:** https://ranga-rekkamalla.github.io/ngx-app-framework/
 - **One-time setup:** Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 - CI uses the Node.js version in `.nvmrc`. Workflow permissions are read-only, except the deploy job, which gets Pages rights.
 
